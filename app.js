@@ -14,20 +14,20 @@ var campgroundSchema = new mongoose.Schema({
 });
 
 var Campground = mongoose.model("Campground", campgroundSchema);
-Campground.create(
-    {
-        name: "Granite Hill",
-        image: "https://www.campsitephotos.com/photo/camp/3880/feature_Nevada_St_Beach-f2.jpg"
+// Campground.create(
+//     {
+//         name: "Granite Hill",
+//         image: "https://www.campsitephotos.com/photo/camp/3880/feature_Nevada_St_Beach-f2.jpg"
         
-    },
-     function(err, campground){
-    if(err){
-        console.log(err);
-    } else {
-        console.log("newly created campground: ");
-        console.log(campground);
-    }
-});
+//     },
+//      function(err, campground){
+//     if(err){
+//         console.log(err);
+//     } else {
+//         console.log("newly created campground: ");
+//         console.log(campground);
+//     }
+// });
 
 app.get("/", function(req, res){
     res.render("landing");
@@ -41,17 +41,24 @@ app.get("/campgrounds", function(req, res) {
         } else {
             res.render("campgrounds", {campgrounds:allCampgrounds});
         }
-    })
+    });
     // res.render("campgrounds", {campgrounds: campgrounds});
-})
+});
 
 app.post("/campgrounds", function(req, res) {
     var name = req.body.name;
     var image = req.body.image
     var newCampground = {name: name, image: image};
-    campgrounds.push(newCampground);
-    res.redirect("/campgrounds");
-})
+    //Create a new campground and save to DB
+    Campground.create(newCampground, function(err, newlyCreated){
+        if(err){
+            console.log(err);
+        } else { 
+            res.redirect("/campgrounds");
+        }
+    });
+});
+
 
 app.get("/campgrounds/new", function(req, res) {
     res.render("new.ejs");
