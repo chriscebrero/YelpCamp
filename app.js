@@ -42,7 +42,7 @@ app.get("/campgrounds", function(req, res) {
         if(err){
             console.log(err);
         } else {
-            res.render("campgrounds", {campgrounds:allCampgrounds});
+            res.render("index", {campgrounds:allCampgrounds});
         }
     });
     // res.render("campgrounds", {campgrounds: campgrounds});
@@ -69,11 +69,19 @@ app.get("/campgrounds/new", function(req, res) {
     res.render("new.ejs");
 })
 
-
+// SHOW - Show more info about one campground
 app.get("/campgrounds/:id", function(req, res){
     //find campground with provided id
+    Campground.FindById(req.params.id, function (err, foundCampground){
+       if(err){
+           console.log(err);
+       } else {
+           //render show template with that campground
+           res.render("show", {campground: foundCampground});
+       }
+    });
     // render show template with the campground
-    res.send("This will be the show page one day");
+    res.render("show");
 });
 
 
