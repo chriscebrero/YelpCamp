@@ -72,19 +72,14 @@ app.get("/campgrounds/new", function(req, res) {
 // SHOW - Show more info about one campground
 app.get("/campgrounds/:id", function(req, res){
     //find campground with provided id
-    Campground.FindById(req.params.id, function (err, foundCampground){
-       if(err){
-           console.log(err);
-       } else {
-           //render show template with that campground
-           res.render("show", {campground: foundCampground});
-       }
+    Campground.findById(req.params.id, function(err, foundCampground){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("show", {campground: foundCampground});
+        }
     });
-    // render show template with the campground
-    res.render("show");
 });
-
-
 
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log("YelpCamp has started!");
