@@ -10,14 +10,16 @@ app.set("view engine", "ejs");
 // SCHEMA setup
 var campgroundSchema = new mongoose.Schema({
     name: String,
-    image: String
+    image: String,
+    description: String,
 });
 
 var Campground = mongoose.model("Campground", campgroundSchema);
 // Campground.create(
 //     {
 //         name: "Granite Hill",
-//         image: "https://www.campsitephotos.com/photo/camp/3880/feature_Nevada_St_Beach-f2.jpg"
+//         image: "https://www.campsitephotos.com/photo/camp/3880/feature_Nevada_St_Beach-f2.jpg",
+//         description: "This is a huge Granite Hill, no bathrooms, no water, beautiful granite."
         
 //     },
 //      function(err, campground){
@@ -33,8 +35,9 @@ app.get("/", function(req, res){
     res.render("landing");
 });
 
-app.get("/campgrounds", function(req, res) {
+app.get("/campgrounds", function(req, res) { 
     // Get all campgrounds from DB
+    //INDEX - Shows all campgrounds
     Campground.find({}, function(err, allCampgrounds){
         if(err){
             console.log(err);
@@ -46,6 +49,7 @@ app.get("/campgrounds", function(req, res) {
 });
 
 app.post("/campgrounds", function(req, res) {
+    // CREATE - adds new campgrounds
     var name = req.body.name;
     var image = req.body.image
     var newCampground = {name: name, image: image};
@@ -61,8 +65,18 @@ app.post("/campgrounds", function(req, res) {
 
 
 app.get("/campgrounds/new", function(req, res) {
+    //NEW - displays form to make a new dog
     res.render("new.ejs");
 })
+
+
+app.get("/campgrounds/:id", function(req, res){
+    //find campground with provided id
+    // render show template with the campground
+    res.send("This will be the show page one day");
+});
+
+
 
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log("YelpCamp has started!");
