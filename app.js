@@ -4,6 +4,7 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var Campground = require("./models/campground")
 var seedDB = require("./seeds");
+var Comment = require("./models/comment");
 
 seedDB();
 mongoose.connect("mongodb://localhost/yelp_camp_4");
@@ -73,6 +74,30 @@ app.get("/campgrounds/:id/comments/new", function(req, res) {
             res.render("comments/new", {campground: campground});
         }
     })
+});
+
+app.post("/campgrounds/:id/comments", function(req, res){
+    //lookup campgrounds using id
+    Campground.findById(req.params.id, function(err, campground){
+        if(err){
+            console.log(err)
+            res.redirect("/campgrounds");
+        } else {
+            Comment.create(req.body.comment, function(err, comment){
+                if(err){
+                    console.log(err);
+                } else {
+                    campground.comments.push(comment);
+                    campground.save();
+                    res.redirect("/campgrounds/" + campground._id);
+                }
+            })
+        }
+    })
+    
+    //create new comments
+    //connect new comment to campground
+    //redirect to campground showpage
 })
 
 app.listen(process.env.PORT, process.env.IP, function() {
