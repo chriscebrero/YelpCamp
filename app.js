@@ -22,7 +22,7 @@ app.get("/campgrounds", function(req, res) {
         if(err){
             console.log(err);
         } else {
-            res.render("index", {campgrounds:allCampgrounds});
+            res.render("campgrounds/index", {campgrounds:allCampgrounds});
         }
     });
     // res.render("campgrounds", {campgrounds: campgrounds});
@@ -47,7 +47,7 @@ app.post("/campgrounds", function(req, res) {
 
 app.get("/campgrounds/new", function(req, res) {
     //NEW - displays form to make a new dog
-    res.render("new.ejs");
+    res.render("campgrounds/new");
 })
 
 // SHOW - Show more info about one campground
@@ -57,7 +57,7 @@ app.get("/campgrounds/:id", function(req, res){
         if(err){
             console.log(err);
         } else {
-            res.render("show", {campground: foundCampground});
+            res.render("campgrounds/show", {campground: foundCampground});
         }
     });
 });
@@ -65,7 +65,7 @@ app.get("/campgrounds/:id", function(req, res){
 //============================ COMMENTS
 
 app.get("/campgrounds/:id/comments/new", function(req, res) {
-    res.send("THIS WILL BE THE COMMENT FORM");
+    res.render("comments/new");
 })
 
 app.listen(process.env.PORT, process.env.IP, function() {
