@@ -6,7 +6,7 @@ var Campground = require("./models/campground")
 var seedDB = require("./seeds");
 
 seedDB();
-mongoose.connect("mongodb://localhost/yelp_camp_3");
+mongoose.connect("mongodb://localhost/yelp_camp_4");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
@@ -61,6 +61,12 @@ app.get("/campgrounds/:id", function(req, res){
         }
     });
 });
+
+//============================ COMMENTS
+
+app.get("/campgrounds/:id/comments/new", function(req, res) {
+    res.send("THIS WILL BE THE COMMENT FORM");
+})
 
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log("YelpCamp has started!");
