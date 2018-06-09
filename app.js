@@ -141,6 +141,10 @@ app.post("/register", function(req, res){
 app.get("/login", function(req, res){
     res.render("login");
 })
+// Handle LOGIN Logic
+app.post("/login", function(req, res){
+    res.send("logging in");
+})
 
 
 
