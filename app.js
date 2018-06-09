@@ -115,6 +115,17 @@ app.post("/campgrounds/:id/comments", function(req, res){
     //redirect to campground showpage
 })
 
+// ===========
+// AUTH ROUTES
+
+// show register form
+app.get("/register", function(req, res){
+    res.render("register");
+})
+
+
+
+
 app.listen(process.env.PORT, process.env.IP, function() {
     console.log("YelpCamp has started!");
 });
