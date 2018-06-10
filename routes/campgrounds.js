@@ -81,6 +81,11 @@ router.put("/:id", function(req, res){
     // redirect somewhere(show page)
 });
 
+// DESTROY CAMPGROUND ROUTE
+router.delete("/:id", function(req, res){
+    res.send("You delete");
+});
+
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
