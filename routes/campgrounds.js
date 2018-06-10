@@ -67,6 +67,11 @@ router.get("/:id/edit", function(req, res){
 
 //UPDATE campground route
 
+router.put("/:id", function(req, res){
+    //find and update the correct campground
+    // redirect somewhere(show page)
+})
+
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
