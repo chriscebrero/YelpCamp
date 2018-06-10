@@ -62,7 +62,12 @@ router.get("/:id/edit", function(req, res){
             if(err){
                 res.redirect("/campgrounds");
             } else {
+                //does the user own the campground
+                if(foundCampground.author.id.equals(req.user._id)) {
                 res.render("campgrounds/edit", {campground: foundCampground});
+            } else {
+                res.send("you do not have permission")
+            }
         }
     });
         
