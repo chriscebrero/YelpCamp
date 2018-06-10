@@ -15,7 +15,7 @@ router.get("/", function(req, res) {
     // res.render("campgrounds", {campgrounds: campgrounds});
 });
 
-router.post("/", function(req, res) {
+router.post("/", isLoggedIn, function(req, res) {
     // CREATE - adds new campgrounds
     var name = req.body.name;
     var image = req.body.image
@@ -32,7 +32,7 @@ router.post("/", function(req, res) {
 });
 
 
-router.get("/new", function(req, res) {
+router.get("/new", isLoggedIn, function(req, res) {
     //NEW - displays form to make a new dog
     res.render("campgrounds/new");
 })
@@ -48,5 +48,12 @@ router.get("/:id", function(req, res){
         }
     });
 });
+
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
 
 module.exports = router;
