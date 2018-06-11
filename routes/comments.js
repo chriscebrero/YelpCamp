@@ -43,6 +43,10 @@ router.post("/", isLoggedIn, function(req, res){
     //create new comments
     //connect new comment to campground
     //redirect to campground showpage
+});
+
+router.get("/:comment_id/edit", function(req, res){
+    res.send("Edit route for comment");
 })
 
 
