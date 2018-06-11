@@ -38,6 +38,7 @@
                         <p>
                             <%= comment.text %>
                         </p>
+                        <% if(currentUser && Comment.author.id.equals(currentUser._id)) { %>
                         <a class="btn btn-xs btn-warning"
                         href="/campgrounds/<%=campground._id%>/comments/<%=comment._id%>/edit">
                             Edit
