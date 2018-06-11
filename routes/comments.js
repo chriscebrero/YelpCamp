@@ -69,6 +69,13 @@ router.put("/:comment_id", function(req, res){
     });
 });
 
+// DESTROY ROUTE - COMMENTS
+
+router.delete("/:comment_id", function(req, res) {
+    //findByIdAndRemove
+    res.send("This is the destroy comment route");
+})
+
 
 
 
