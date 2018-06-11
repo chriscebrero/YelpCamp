@@ -45,6 +45,7 @@ router.post("/", isLoggedIn, function(req, res){
     //redirect to campground showpage
 });
 
+//EDIT ROUTE
 router.get("/:comment_id/edit", function(req, res){
     Comment.findById(req.params.comment_id, function(err, foundComment){
         if(err){
@@ -55,6 +56,14 @@ router.get("/:comment_id/edit", function(req, res){
     });
     
 });
+
+//UPDATE ROUTE - COMMENTS
+
+router.put("/:comment_id", function(req, res){
+    res.send("you hit the update route");
+})
+
+
 
 
 //middleware
