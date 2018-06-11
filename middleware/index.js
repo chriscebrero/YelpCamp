@@ -1,5 +1,5 @@
 var Campground = require("../models/campground");
-var Comment = require("../models/campground");
+var Comment = require("../models/comment");
 
 //All the middle ware
 var middlewareObj = {};
